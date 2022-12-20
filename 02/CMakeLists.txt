@@ -3,5 +3,4 @@ project(AoC22)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_subdirectory(01)
-add_subdirectory(02)
+add_executable(02AoC22 AoC021222.cpp)
