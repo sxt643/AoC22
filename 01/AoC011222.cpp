@@ -1,16 +1,17 @@
 #include <iostream>
 #include <fstream>
 #include <queue>
+
 using namespace std;
 
-int mostCalsCarried(const string& filename) {
+int mostCalsCarried(const string &filename) {
     ifstream fileRead(filename);
     string lineText;
 
     int mostCals, currCals = 0;
 
-    while(getline(fileRead, lineText)) {
-        if(lineText.empty()) {
+    while (getline(fileRead, lineText)) {
+        if (lineText.empty()) {
             mostCals = mostCals > currCals ? mostCals : currCals;
             currCals = 0;
         } else
@@ -22,16 +23,16 @@ int mostCalsCarried(const string& filename) {
     return mostCals;
 }
 
-int totCalsTopk(const string& filename, const int k=3) {
+int totCalsTopk(const string &filename, const int k = 3) {
     ifstream fileRead(filename);
     string lineText;
 
     priority_queue<int, vector<int>, greater<>> pq;
     int currCals = 0;
 
-    while(getline(fileRead, lineText)) {
-        if(lineText.empty()) {
-            if(pq.size() < k)
+    while (getline(fileRead, lineText)) {
+        if (lineText.empty()) {
+            if (pq.size() < k)
                 pq.push(currCals);
             else if (currCals > pq.top()) {
                 pq.pop();

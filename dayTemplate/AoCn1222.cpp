@@ -9,12 +9,11 @@ int testFunc(const string &filename) {
     ifstream fileRead(filename);
     string lineText;
 
-    while(getline(fileRead, lineText)) {
+    while (getline(fileRead, lineText)) {
 
     }
 
     fileRead.close();
-
     return sum;
 }
 

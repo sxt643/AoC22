@@ -4,24 +4,29 @@
 
 using namespace std;
 
-int scoreOrigStrategy(const string& filename) {
+int scoreOrigStrategy(const string &filename) {
     const int DRAW_SCORE = 3;
     const int WIN_SCORE = 6;
-    map<char,int> scoreMap {{'X',1}, {'Y',2}, {'Z',3}, {'A',1}, {'B',2}, {'C',3}};
+    map<char, int> scoreMap{{'X', 1},
+                            {'Y', 2},
+                            {'Z', 3},
+                            {'A', 1},
+                            {'B', 2},
+                            {'C', 3}};
     ifstream fileRead(filename);
     string lineText;
 
 
     int totalScore = 0;
 
-    while(getline(fileRead, lineText)) {
+    while (getline(fileRead, lineText)) {
         int oppMove = scoreMap.at(lineText[0]);
         int myMove = scoreMap.at(lineText[2]);
         totalScore += myMove;
         if (oppMove == myMove) // if draw
             totalScore += DRAW_SCORE;
-        else if(myMove-oppMove==1 || myMove-oppMove == -2) // Player wins
-            totalScore+=WIN_SCORE;
+        else if (myMove - oppMove == 1 || myMove - oppMove == -2) // Player wins
+            totalScore += WIN_SCORE;
     }
 
     fileRead.close();
@@ -29,26 +34,29 @@ int scoreOrigStrategy(const string& filename) {
     return totalScore;
 }
 
-int scoreNewStrategy(const string& filename) {
+int scoreNewStrategy(const string &filename) {
     const int DRAW_SCORE = 3;
     const int WIN_SCORE = 6;
-    map<char,int> scoreMap {{'A',1}, {'B',2}, {'C',3}};
-    map<char,int> loseMap {{'A', 3}, {'B', 3}};
+    map<char, int> scoreMap{{'A', 1},
+                            {'B', 2},
+                            {'C', 3}};
+    map<char, int> loseMap{{'A', 3},
+                           {'B', 3}};
     ifstream fileRead(filename);
     string lineText;
 
     int totalScore = 0;
 
-    while(getline(fileRead, lineText)) {
+    while (getline(fileRead, lineText)) {
         int oppMove = scoreMap.at(lineText[0]);
         char myMove = lineText[2];
 
         if (myMove == 'X') // Lose
-            totalScore += (oppMove-1 > 0) ? oppMove-1 : 3;
-        else if(myMove == 'Y') // Draw
+            totalScore += (oppMove - 1 > 0) ? oppMove - 1 : 3;
+        else if (myMove == 'Y') // Draw
             totalScore += oppMove + DRAW_SCORE;
         else if (myMove == 'Z') // Win
-            totalScore += 6 + ((oppMove+1 <= 3) ? oppMove+1 : 1);
+            totalScore += 6 + ((oppMove + 1 <= 3) ? oppMove + 1 : 1);
 
     }
 

@@ -10,7 +10,7 @@ int numContained(const string &filename) {
     string lineText;
 
     string low1String, high1String, low2String, high2String;
-    while(getline(fileRead, low1String, '-')) {
+    while (getline(fileRead, low1String, '-')) {
         getline(fileRead, high1String, ',');
         getline(fileRead, low2String, '-');
         getline(fileRead, high2String);
